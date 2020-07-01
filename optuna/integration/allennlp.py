@@ -121,10 +121,12 @@ class AllenNLPExecutor(object):
         params.update({key: str(value) for key, value in self._params.items()})
 
         allennlp_params = json.loads(_jsonnet.evaluate_file(self._config_file, ext_vars=params))
+
+        return allennlp_params
         # allennlp_params contains a list of string or string as value values.
         # Some params couldn't be casted correctly and
         # infer_and_cast converts them into desired values.
-        return allennlp.common.params.infer_and_cast(allennlp_params)
+        # return allennlp.common.params.infer_and_cast(allennlp_params)
 
     @staticmethod
     def _is_encodable(value: str) -> bool:
